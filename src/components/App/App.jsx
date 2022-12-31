@@ -1,19 +1,16 @@
 import { Route, Routes } from "react-router-dom";
-import { Container, StyledLink, Header } from "./App.styled";
+import { Container, } from "./App.styled";
+import { Home } from "pages/Home";
+import { Movies } from "pages/Movies";
+import { Layout } from "components/Layout/Layout";
 
 export const App = () => {
   return (
   <Container>
-      <Header>
-        <nav>
-          <StyledLink to="/" end>
-            Home
-            </StyledLink>
-          <StyledLink to="/movies">Movies</StyledLink>
-        </nav>
-      </Header>
       <Routes>
-        <Route/>
+        <Route path="/" element={Layout}/>
+        <Route index element={<Home />}/>
+        <Route path="/movies" element={<Movies/>}/>
       </Routes>
   </Container>
   );
