@@ -5,7 +5,6 @@ import { MoviesList } from "components/MoviesList/MoviesList";
 export const Home = () => {
 	const [movies, setMovies] = useState([]);
 	const [ isLoading, setIsLoading] = useState(false);
-	console.log(movies)
 
 	useEffect(() => {
 		setIsLoading(true);
@@ -19,7 +18,7 @@ export const Home = () => {
 		<main>
 			<h1>Trending Today</h1>
 			{isLoading && <p>Loading...</p>}
-			{movies && <MoviesList movies={movies}/>}
+			{movies.length > 0 && <MoviesList movies={movies}/>}
 		</main>
 	)
 }
