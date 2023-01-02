@@ -1,12 +1,12 @@
 import { StyledLink, List } from "./MoviesList.styled"
 
-export const MoviesList=({movies})=> {
+export const MoviesList=({movies, location})=> {
 	return(
 		<List>
 			{movies.map(({id, original_title}) => {
 				return(
 					<li key={id}>
-						<StyledLink >
+						<StyledLink to={`/movies/${id}`} state={{state: location}}>
 							{original_title}
 						</StyledLink>
 					</li>

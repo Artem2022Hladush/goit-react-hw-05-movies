@@ -1,4 +1,4 @@
-import { Form, Input } from "./SeachBox.styled";
+import { Form, Input, SearchButton } from "./SeachBox.styled";
 
 export const SearchForm = ({onSubmit}) => {
 	return(
@@ -9,6 +9,7 @@ export const SearchForm = ({onSubmit}) => {
 			autoComplete="off"
 			placeholder="Enter movie name"
 			/>
+			<SearchButton>Search</SearchButton>
 		</Form>
 	)
 }
