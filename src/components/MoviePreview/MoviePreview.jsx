@@ -9,19 +9,28 @@ import {
   Score,
 } from './MoviePreview.styled';
 
-export const MoviePreview = ({ poster, title, vote, overview, release, genres }) => {
+export const MoviePreview = ({ movie}) => {
+	const {
+		poster_path,
+		original_title,
+		vote_average,
+		overview,
+		release_date,
+		genres,
+	 } = movie;
+
 	return(
 		<Container>
       <Image
-      	src={`https://image.tmdb.org/t/p/w500${poster}`}
-      	alt={title}
+      	src={`https://image.tmdb.org/t/p/w500${poster_path}`}
+      	alt={original_title}
       />
       <div>
       	<MovieTitle>
-         	{title} {release}
+         	{original_title} {release_date}
       	</MovieTitle>
       	<InfoTitle>User score: </InfoTitle>
-        <Score>{Math.floor(vote * 10)} %</Score>
+        <Score>{Math.floor(vote_average * 10)} %</Score>
       	<InfoTitle>Overview</InfoTitle>
       	{overview && <Info>{overview}</Info>}
       	<InfoTitle>Genres</InfoTitle>

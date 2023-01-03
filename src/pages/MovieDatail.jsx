@@ -7,69 +7,33 @@ import { MoviePreview } from "components/MoviePreview/MoviePreview";
 import { AdditionalInfo } from "components/AdditionalInfo/AdditionalInfo";
 
 const MovieDatail = () => {
-	const [movie, setMovie] = useState([]);
-	const [error, setError] = useState(null);
+	const [movie, setMovie] = useState([ ]);
+	const [isLoading, setIsLoading] = useState(false)
 	const {movieId} = useParams();
 	const location = useLocation();
 	const backLinkHref = location.state?.from ?? '/';
 
 	useEffect(() => {
-		setError(null);
-  
-		const getDetail = async () => {
-		  try {
-			 const {
-				poster_path,
-				original_title,
-				vote_average,
-				overview,
-				release_date,
-				genres,
-			 } = await movieDeteils(movieId);
-  
-			 const fetchedDetails = {
-				poster_path,
-				original_title,
-				vote_average,
-				overview,
-				release_date,
-				genres,
-			 };
-			 setMovie(fetchedDetails);
-		  } catch {
-			 setError('Something went wrong');
-		  }
-		};
-		getDetail();
-	 }, [movieId]);
-  
-	 if (!movie) {
+		setIsLoading(true);
+		movieDeteils(movieId)
+			.then(data => {
+				setMovie(data.results);
+			})
+			.catch(error => console.log(error))
+			.finally(setIsLoading(false));
+		}, [movieId]);
+
+		if (!movie) {
 		return;
-	 }
-  
-	 const {
-		poster_path,
-		original_title,
-		vote_average,
-		overview,
-		release_date,
-		genres,
-	 } = movie;
+		}
 
 	return(
 		<main>
-			{error && {error}}
+			{isLoading && 'Error'}
 		<BackLink to={backLinkHref}>Back</BackLink>
-		{movie !== {} && (
         <MoviePreview
-          poster={poster_path}
-          title={original_title}
-          vote={vote_average}
-          overview={overview}
-          release={release_date}
-          genres={genres}
+         movie={movie}
         />
-      )}
 		<AdditionalInfo location={backLinkHref}/>
 		<Suspense>
 			<Outlet/>
