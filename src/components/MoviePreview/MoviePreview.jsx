@@ -1,6 +1,6 @@
 import {
   Container,
-  Genres,
+  Genre,
   GenresList,
   Image,
   Info,
@@ -9,33 +9,25 @@ import {
   Score,
 } from './MoviePreview.styled';
 
-export const MoviePreview = ({movie}) => {
-	const {
-		poster_path,
-		original_title,
-		vote_average,
-		overview,
-		release_date,
-		genres,
-	 } = movie;
+export const MoviePreview = ({ poster, title, vote, overview, release, genres }) => {
 	return(
 		<Container>
       <Image
-      	src={`https://image.tmdb.org/t/p/w500${poster_path}`}
-      	alt={original_title}
+      	src={`https://image.tmdb.org/t/p/w500${poster}`}
+      	alt={title}
       />
       <div>
       	<MovieTitle>
-         	{original_title} {release_date}
+         	{title} {release}
       	</MovieTitle>
       	<InfoTitle>User score: </InfoTitle>
-        <Score>{Math.floor(vote_average * 10)} %</Score>
+        <Score>{Math.floor(vote * 10)} %</Score>
       	<InfoTitle>Overview</InfoTitle>
       	{overview && <Info>{overview}</Info>}
       	<InfoTitle>Genres</InfoTitle>
       	<GenresList>
-         	{genres.map(genre => {
-            return <Genres key={genre.name}>{genre.name}</Genres>;
+         	{genres.map(({id, name}) => {
+            return <Genre key={id}>{name}</Genre>;
          	})}
       	</GenresList>
       </div>

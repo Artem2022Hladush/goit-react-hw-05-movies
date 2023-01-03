@@ -3,7 +3,7 @@ import { getTrendinMovies } from "service/apiFetch";
 import { MoviesList } from "components/MoviesList/MoviesList";
 import { useLocation } from "react-router-dom";
 
-export const Home = () => {
+ const Home = () => {
 	const [movies, setMovies] = useState([]);
 	const [ isLoading, setIsLoading] = useState(false);
 	const location = useLocation();
@@ -24,3 +24,5 @@ export const Home = () => {
 		</main>
 	)
 }
+
+export default Home;

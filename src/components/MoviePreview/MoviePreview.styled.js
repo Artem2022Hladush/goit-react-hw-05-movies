@@ -59,7 +59,7 @@ export const GenresList = styled.ul`
   list-style: none;
 `;
 
-export const Genres = styled.li`
+export const Genre = styled.li`
   padding: 10px;
   display: flex;
   align-items: center;
