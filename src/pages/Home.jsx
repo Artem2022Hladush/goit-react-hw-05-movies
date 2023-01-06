@@ -5,11 +5,11 @@ import { useLocation } from "react-router-dom";
 
  const Home = () => {
 	const [movies, setMovies] = useState([]);
-	const [ isLoading, setIsLoading] = useState(false);
+	const [error, setError] = useState(null);
 	const location = useLocation();
 
 	useEffect(() => {
-		setIsLoading(true)
+		setError(null)
   
 		const getMovies = async () => {
 		  try {
@@ -21,7 +21,7 @@ import { useLocation } from "react-router-dom";
   
 			 setMovies(fetchedMovies);
 		  } catch {
-			 setIsLoading(false)
+			 setError('Something went wrong')
 		  }
 		};
 		getMovies();
@@ -30,8 +30,8 @@ import { useLocation } from "react-router-dom";
 	return (
 		<main>
 			<h1>Trending Today</h1>
-			{movies && <MoviesList movies={movies} location={location}/>}
-			{isLoading && <p>Loading...</p>}
+			{error && 'Error'}
+			{movies.length > 0 && <MoviesList movies={movies} location={location}/>}
 		</main>
 	)
 }

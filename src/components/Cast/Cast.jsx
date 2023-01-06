@@ -37,7 +37,7 @@ const Cast = () => {
             return (
               <ListItem key={id}>
                 <Image
-                  src={profile_path}
+                  src={`https://image.tmdb.org/t/p/w500${profile_path}`}
                   alt={name}
                 />
                 <Wrapper>

@@ -30,7 +30,6 @@ const Reviews = () => {
   return (
     <>
       {error && "Error"}
-
       <List>
         {reviews.length > 0 ? (
           reviews.map(({ id, author, content, created_at }) => {

@@ -13,6 +13,7 @@ export const ListItem = styled.li`
   flex-basis: 100%;
   border-radius: 5px;
   overflow: hidden;
+  flex-basis: calc((100% - 48px) / 4);
 `;
 
 export const Image = styled.img`

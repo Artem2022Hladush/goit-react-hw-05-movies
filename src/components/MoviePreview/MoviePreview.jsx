@@ -22,7 +22,7 @@ export const MoviePreview = ({ movie }) => {
 	return (
 		<Container>
 			<Image
-				src={poster_path}
+				src={`https://image.tmdb.org/t/p/w500${poster_path}`}
 				alt={original_title}
 			/>
 			<div>
