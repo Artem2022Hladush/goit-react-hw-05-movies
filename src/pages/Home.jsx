@@ -9,18 +9,29 @@ import { useLocation } from "react-router-dom";
 	const location = useLocation();
 
 	useEffect(() => {
-		setIsLoading(true);
-			getTrendinMovies()
-			.then(data =>{setMovies(data.results)})
-			.catch(error => console.log(error))
-			.finally(setIsLoading(false))
-	}, [])
+		setIsLoading(true)
+  
+		const getMovies = async () => {
+		  try {
+			 const data = await getTrendinMovies();
+  
+			 const fetchedMovies = data.results.map(({ id, original_title }) => {
+				return { id, original_title };
+			 });
+  
+			 setMovies(fetchedMovies);
+		  } catch {
+			 setIsLoading(false)
+		  }
+		};
+		getMovies();
+	 }, [])
 
 	return (
 		<main>
 			<h1>Trending Today</h1>
+			{movies && <MoviesList movies={movies} location={location}/>}
 			{isLoading && <p>Loading...</p>}
-			{movies.length > 0 && <MoviesList movies={movies} location={location}/>}
 		</main>
 	)
 }

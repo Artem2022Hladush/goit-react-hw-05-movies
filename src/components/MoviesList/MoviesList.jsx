@@ -6,7 +6,7 @@ export const MoviesList=({movies, location})=> {
 			{movies.map(({id, original_title}) => {
 				return(
 					<li key={id}>
-						<StyledLink to={`/movies/${id}`} state={{state: location}}>
+						<StyledLink to={`/movies/${id}`} state={{from: location}}>
 							{original_title}
 						</StyledLink>
 					</li>

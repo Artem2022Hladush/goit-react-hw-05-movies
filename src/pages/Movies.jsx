@@ -2,16 +2,16 @@ import { searchMovie } from "service/apiFetch";
 import { MoviesList } from "components/MoviesList/MoviesList";
 import { SearchForm } from "components/SearchBox/SearchBox";
 import {useState, useEffect } from "react";
-import { useSearchParams } from "react-router-dom";
+import { useLocation, useSearchParams } from "react-router-dom";
 
 const Movies=()=> {
 	const [movies, setMovies] = useState([]);
 	const [isLoading, setIsLoading] = useState(false);
 	const [searchParams, setSearchParams] = useSearchParams();
 	const movieName = searchParams?.get('query') ?? '';
+	const location = useLocation();
 
 	useEffect(() => {
-   	setIsLoading(true)
 
    	if (movieName === '') {
       return;
@@ -23,7 +23,9 @@ const Movies=()=> {
 
       	const movies = await searchMovie(movieName);
 
-      	const fetchedMovies = movies.results;
+      	const fetchedMovies = movies.results.map(({ id, original_title }) => {
+				return { id, original_title };
+			 });
 
       	setMovies(fetchedMovies);
 
@@ -53,9 +55,9 @@ const Movies=()=> {
 	};
 	return(
 		<main>
+			{isLoading && <p>Loading...</p>}
 		<SearchForm onSubmit={searchHandler}/>
-		{isLoading && <p>Loading...</p>}
-		{movies.length > 0 && <MoviesList movies={movies}/>}
+		{movies && <MoviesList movies={movies} location={location}/>}
 		</main>
 	)
 }
